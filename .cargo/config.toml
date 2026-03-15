@@ -1,0 +1,16 @@
+[build]
+# カスタムJSONファイルをターゲットに指定
+target = "riscv32ec-unknown-none-elf.json"
+
+[target.riscv32ec-unknown-none-elf]
+# リンカスクリプト memory.x を使用する設定
+rustflags = [
+  "-C", "link-arg=-Tmemory.x",
+  "-C", "link-arg=-Tlink.x",
+  "-C", "linker=rust-lld",
+  "-C", "link-arg=-melf32lriscv",
+]
+
+[unstable]
+# 標準ライブラリ(core)をこのターゲット向けに自動ビルドする
+build-std = ["core"]
